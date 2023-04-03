@@ -1,20 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-#from selenium.webdriver.chrome.service import Service
 import unittest
 import time
 from Pages.homepage import HomePage
 from Pages.loginpage import LoginPage
-import HtmlTestRunner
-
-
 
 
 class LoginTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        #s = Service('C:/temp/ws-utilities/chromedriver.exe')
         cls.driver = webdriver.Chrome(executable_path='C:/temp/ws-utilities/chromedriver.exe')
         cls.driver.maximize_window()
         cls.driver.implicitly_wait(10)
@@ -44,7 +39,7 @@ class LoginTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(testRunner=HtmlTestRunner.HtmlTestRunner(output='C:/temp/ws-pycharm/POMProjectDemo/Reports'))
+    unittest.main()
 
 
 
