@@ -1,29 +1,39 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
+#from selenium.webdriver.chrome.service import Service
 import unittest
 import time
+from Pages.homepage import HomePage
+from Pages.loginpage import LoginPage
+import HtmlTestRunner
+
+
 
 
 class LoginTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        s = Service('C:/temp/ws-utilities/chromedriver.exe')
-        cls.driver = webdriver.Chrome(service=s)
+        #s = Service('C:/temp/ws-utilities/chromedriver.exe')
+        cls.driver = webdriver.Chrome(executable_path='C:/temp/ws-utilities/chromedriver.exe')
         cls.driver.maximize_window()
         cls.driver.implicitly_wait(10)
 
     def test_login_valid(self):
-        self.driver.get('https://us.yahoo.com')
-        self.driver.find_element(By.XPATH,'//*[@id="ybarAccountProfile"]/a').click()
-        self.driver.find_element(By.ID, 'login-username').send_keys('ajoaquim@yahoo.com')
-        self.driver.find_element(By.ID, 'login-signin').click()
-        self.driver.find_element(By.ID, 'login-passwd').send_keys('MATR@676366')
-        self.driver.find_element(By.ID, 'login-signin').click()
-        time.sleep(5)
-        self.driver.find_element(By.XPATH, '//*[@id="ybarAccountMenuOpener"]/span').click()
-        self.driver.find_element(By.XPATH, '//*[@id="profile-signout-link"]/span[2]').click()
+        driver = self.driver
+        driver.get('https://us.yahoo.com')
+
+        login = LoginPage(driver)
+        login.click_sigin()
+        login.enter_username("ajoaquim@yahoo.com")
+        login.click_login()
+        login.enter_passwd("MATR@676366")
+        login.click_confirm_login()
+
+        home = HomePage(driver)
+        home.click_label_showuser()
+        home.click_label_logout()
+
         time.sleep(5)
 
     @classmethod
@@ -31,8 +41,10 @@ class LoginTest(unittest.TestCase):
         cls.driver.close()
         cls.driver.quit()
         print('Test Completed!!')
+
+
 if __name__ == '__main__':
-        unittest.main()
+    unittest.main(testRunner=HtmlTestRunner.HtmlTestRunner(output='C:/temp/ws-pycharm/POMProjectDemo/Reports'))
 
 
 
