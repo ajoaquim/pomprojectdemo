@@ -2,8 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import unittest
 import time
+import sys
+import os
 from Pages.homepage import HomePage
 from Pages.loginpage import LoginPage
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 
 class LoginTest(unittest.TestCase):
