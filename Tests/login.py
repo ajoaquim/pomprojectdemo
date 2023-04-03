@@ -6,6 +6,7 @@ import sys
 import os
 from Pages.homepage import HomePage
 from Pages.loginpage import LoginPage
+import HtmlTestRunner
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -43,7 +44,7 @@ class LoginTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='C:/temp/ws-pycharm/POMProjectDemo/Reports'))
 
 
 
